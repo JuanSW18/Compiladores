@@ -42,10 +42,11 @@ class Lexico {
    * Translates characters to character classes
    */
   private static final String ZZ_CMAP_PACKED = 
-    "\12\0\1\0\2\0\1\0\34\0\1\5\1\4\1\0\1\6\1\0"+
-    "\1\7\12\2\3\0\1\3\3\0\32\1\4\0\1\1\1\0\1\1"+
-    "\3\1\1\1\6\1\1\1\1\1\1\1\1\1\2\1\1\1\1\1"+
-    "\1\1\6\1\uffff\0\uffff\0\uffff\0\uffff\0\uffff\0\uffff\0\uffff\0\uffff\0\uffff\0\uffff\0\uffff\0\uffff\0\uffff\0\uffff\0\uffff\0\uffff\0\uff95\0";
+    "\12\0\1\3\26\0\1\6\6\0\1\4\1\5\1\13\1\12\1\22"+
+    "\1\14\1\0\1\15\12\2\2\0\1\11\1\7\1\10\2\0\32\1"+
+    "\1\20\1\0\1\21\1\0\1\1\1\0\1\1\1\1\1\1\1\1"+
+    "\1\1\1\1\2\1\1\1\2\1\1\1\1\1\1\1\1\1\2\1"+
+    "\1\1\1\1\1\1\6\1\1\16\1\0\1\17\uffff\0\uffff\0\uffff\0\uffff\0\uffff\0\uffff\0\uffff\0\uffff\0\uffff\0\uffff\0\uffff\0\uffff\0\uffff\0\uffff\0\uffff\0\uffff\0\uff92\0";
 
   /** 
    * Translates characters to character classes
@@ -58,10 +59,12 @@ class Lexico {
   private static final int [] ZZ_ACTION = zzUnpackAction();
 
   private static final String ZZ_ACTION_PACKED_0 =
-    "\1\0\1\1\1\2\1\3\1\4\1\5\1\6\1\7";
+    "\1\1\1\2\1\3\1\4\1\5\1\0\1\6\1\7"+
+    "\1\10\1\11\1\12\1\13\1\14\1\15\1\16\1\17"+
+    "\1\20\1\21\1\22\1\23\1\24\1\25";
 
   private static int [] zzUnpackAction() {
-    int [] result = new int[8];
+    int [] result = new int[22];
     int offset = 0;
     offset = zzUnpackAction(ZZ_ACTION_PACKED_0, offset, result);
     return result;
@@ -86,10 +89,12 @@ class Lexico {
   private static final int [] ZZ_ROWMAP = zzUnpackRowMap();
 
   private static final String ZZ_ROWMAP_PACKED_0 =
-    "\0\0\0\10\0\20\0\30\0\30\0\30\0\30\0\30";
+    "\0\0\0\23\0\46\0\46\0\46\0\71\0\114\0\137"+
+    "\0\162\0\46\0\46\0\46\0\46\0\46\0\46\0\46"+
+    "\0\46\0\46\0\46\0\46\0\46\0\46";
 
   private static int [] zzUnpackRowMap() {
-    int [] result = new int[8];
+    int [] result = new int[22];
     int offset = 0;
     offset = zzUnpackRowMap(ZZ_ROWMAP_PACKED_0, offset, result);
     return result;
@@ -113,10 +118,12 @@ class Lexico {
 
   private static final String ZZ_TRANS_PACKED_0 =
     "\1\0\1\2\1\0\1\3\1\4\1\5\1\6\1\7"+
-    "\1\0\2\2\10\0\1\10\14\0";
+    "\1\10\1\11\1\12\1\13\1\14\1\15\1\16\1\17"+
+    "\1\20\1\21\1\22\1\0\2\2\52\0\1\23\22\0"+
+    "\1\24\22\0\1\25\22\0\1\26\13\0";
 
   private static int [] zzUnpackTrans() {
-    int [] result = new int[32];
+    int [] result = new int[133];
     int offset = 0;
     offset = zzUnpackTrans(ZZ_TRANS_PACKED_0, offset, result);
     return result;
@@ -154,10 +161,10 @@ class Lexico {
   private static final int [] ZZ_ATTRIBUTE = zzUnpackAttribute();
 
   private static final String ZZ_ATTRIBUTE_PACKED_0 =
-    "\1\0\2\1\5\11";
+    "\2\1\3\11\1\0\3\1\15\11";
 
   private static int [] zzUnpackAttribute() {
-    int [] result = new int[8];
+    int [] result = new int[22];
     int offset = 0;
     offset = zzUnpackAttribute(ZZ_ATTRIBUTE_PACKED_0, offset, result);
     return result;
@@ -256,7 +263,7 @@ public String lexema;
     char [] map = new char[0x110000];
     int i = 0;  /* index in packed string  */
     int j = 0;  /* index in unpacked array */
-    while (i < 98) {
+    while (i < 128) {
       int  count = packed.charAt(i++);
       char value = packed.charAt(i++);
       do map[j++] = value; while (--count > 0);
@@ -484,6 +491,62 @@ public String lexema;
     while (true) {
       zzMarkedPosL = zzMarkedPos;
 
+      boolean zzR = false;
+      int zzCh;
+      int zzCharCount;
+      for (zzCurrentPosL = zzStartRead  ;
+           zzCurrentPosL < zzMarkedPosL ;
+           zzCurrentPosL += zzCharCount ) {
+        zzCh = Character.codePointAt(zzBufferL, zzCurrentPosL, zzMarkedPosL);
+        zzCharCount = Character.charCount(zzCh);
+        switch (zzCh) {
+        case '\u000B':
+        case '\u000C':
+        case '\u0085':
+        case '\u2028':
+        case '\u2029':
+          yyline++;
+          yycolumn = 0;
+          zzR = false;
+          break;
+        case '\r':
+          yyline++;
+          yycolumn = 0;
+          zzR = true;
+          break;
+        case '\n':
+          if (zzR)
+            zzR = false;
+          else {
+            yyline++;
+            yycolumn = 0;
+          }
+          break;
+        default:
+          zzR = false;
+          yycolumn += zzCharCount;
+        }
+      }
+
+      if (zzR) {
+        // peek one character ahead if it is \n (if we have counted one line too much)
+        boolean zzPeek;
+        if (zzMarkedPosL < zzEndReadL)
+          zzPeek = zzBufferL[zzMarkedPosL] == '\n';
+        else if (zzAtEOF)
+          zzPeek = false;
+        else {
+          boolean eof = zzRefill();
+          zzEndReadL = zzEndRead;
+          zzMarkedPosL = zzMarkedPos;
+          zzBufferL = zzBuffer;
+          if (eof) 
+            zzPeek = false;
+          else 
+            zzPeek = zzBufferL[zzMarkedPosL] == '\n';
+        }
+        if (zzPeek) yyline--;
+      }
       zzAction = -1;
 
       zzCurrentPosL = zzCurrentPos = zzStartRead = zzMarkedPosL;
@@ -551,33 +614,89 @@ public String lexema;
       else {
         switch (zzAction < 0 ? zzAction : ZZ_ACTION[zzAction]) {
           case 1: 
-            { lexema=yytext(); return ID;
+            { return tipo_dato;
             }
-          case 8: break;
+          case 22: break;
           case 2: 
+            { return ID;
+            }
+          case 23: break;
+          case 3: 
+            { return salto;
+            }
+          case 24: break;
+          case 4: 
+            { return LPARENT;
+            }
+          case 25: break;
+          case 5: 
+            { return RPARENT;
+            }
+          case 26: break;
+          case 6: 
             { return ASSIGN;
             }
-          case 9: break;
-          case 3: 
+          case 27: break;
+          case 7: 
+            { return MAYOR;
+            }
+          case 28: break;
+          case 8: 
+            { return MENOR;
+            }
+          case 29: break;
+          case 9: 
             { return PLUS;
             }
-          case 10: break;
-          case 4: 
+          case 30: break;
+          case 10: 
             { return TIMES;
             }
-          case 11: break;
-          case 5: 
+          case 31: break;
+          case 11: 
             { return MINUS;
             }
-          case 12: break;
-          case 6: 
+          case 32: break;
+          case 12: 
             { return DIVIDE;
             }
-          case 13: break;
-          case 7: 
+          case 33: break;
+          case 13: 
+            { return llaveI;
+            }
+          case 34: break;
+          case 14: 
+            { return llaveD;
+            }
+          case 35: break;
+          case 15: 
+            { return corcheteI;
+            }
+          case 36: break;
+          case 16: 
+            { return corcheteD;
+            }
+          case 37: break;
+          case 17: 
+            { return coma;
+            }
+          case 38: break;
+          case 18: 
+            { return DIF;
+            }
+          case 39: break;
+          case 19: 
             { return EQUALS;
             }
-          case 14: break;
+          case 40: break;
+          case 20: 
+            { return MAYOR_IGUAL;
+            }
+          case 41: break;
+          case 21: 
+            { return MENOR_IGUAL;
+            }
+          case 42: break;
           default:
             zzScanError(ZZ_NO_MATCH);
         }

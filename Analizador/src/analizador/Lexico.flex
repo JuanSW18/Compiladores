@@ -14,11 +14,13 @@ import static analizador.Tokens.*;
 %class Lexico
 
 //Declaraciones de Expresiones Regulares
+%line
+%column
 %type Tokens
 letra = [a-zA-Z_]
 digito = [0-9]
-espacio = [\r\n]
-tipo = entero | real
+espacio = [\n]
+tipo = real | entero
 
 %{
 public String lexema;
@@ -29,12 +31,30 @@ public String lexema;
 
 
 /*-------LOGICA - Reglas Lexicograficas-------*/
-"=" {return ASSIGN;}
+{letra}({letra}|{digito})* {return ID;}
+"(" {return LPARENT;}
+")" {return RPARENT;}
+"!=" {return DIF;}
 "==" {return EQUALS;}
+">="  {return MAYOR_IGUAL;}
+"<="  {return MENOR_IGUAL;}
+">"   {return MAYOR;}
+"<"   {return MENOR;}
+"=" {return ASSIGN;}
 "+" {return PLUS;}
 "*" {return TIMES;}
 "-" {return MINUS;}
 "/" {return DIVIDE;}
-
-{letra}({letra}|{digito})* {lexema=yytext(); return ID;}
-
+"si" {return s;}
+"fsi" {return s_end;}
+"mientras"  {return w;}
+"fmientras"  {return w_end;}
+"leer" {return read;}
+"escribir" {return write;}
+"{" {return llaveI;}
+"}" {return llaveD;}
+"[" {return corcheteI;}
+"]" {return corcheteD;}
+{tipo} {return tipo_dato;}
+"," {return coma;}
+{espacio} {return salto;}
