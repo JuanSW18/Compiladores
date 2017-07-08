@@ -1,0 +1,31 @@
+package Analizador;
+import java.io.*;
+import java_cup.runtime;
+
+/*Terminales*/
+Terminal ID, LPARENT, DIF, RPARENT, ASSIGN, EQUALS, MAYOR_IGUAL, MENOR_IGUAL, 
+        MAYOR, MENOR, PLUS, TIMES, MINUS, DIVIDE, s, s_end, w, w_end, 
+        read, write, llaveI, llaveD, corcheteI, corcheteD, tipo_dato, coma, salto;
+Terminal INICIO, FIN;
+
+/*No terminales*/
+Expr_list no terminal, expr_part;
+
+/*Gramatica*/
+
+S ::= INICIO Expr_list FIN;
+Expr_list ::= Declaracion lis_sent;
+Declaracion ::= Tipo List_var;
+List_var ::= Var | Var List_var;
+Var ::= ID inicial1 | ID List_dim inicial2;
+Inicial1 ::= ASSIGn Num | null;
+List_dim ::= corcheteI Num corcheteD;
+Inicial2 ::= llaveI List_num llaveD | null;
+List_num ::= Num | Num , List_num;
+Tipo ::= entero;
+List_sent ::= Sentencia | Sentencia list_sent;
+Sentencia ::= Sentecia_si | Sentencia_mientras;
+Sentencia_si ::= s Bloque s_end;
+Sentencia_mientras ::= w Bloque w_end;
+Bloque ::= List_sent;
+
