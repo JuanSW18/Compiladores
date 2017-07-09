@@ -4,8 +4,8 @@ import java_cup.runtime;
 
 /*Terminales*/
 Terminal ID, LPARENT, DIF, RPARENT, ASSIGN, EQUALS, MAYOR_IGUAL, MENOR_IGUAL, 
-        MAYOR, MENOR, PLUS, TIMES, MINUS, DIVIDE, s, s_end, w, w_end, 
-        read, write, llaveI, llaveD, corcheteI, corcheteD, tipo_dato, coma, salto;
+        MAYOR, MENOR, PLUS, TIMES, MINUS, DIVIDE, MOD, s, s_end, w, w_end, 
+        read, write, llaveI, llaveD, corcheteI, corcheteD, tipo_dato, coma, salto, cadena;
 Terminal INICIO, FIN;
 
 /*No terminales*/
@@ -13,19 +13,57 @@ Expr_list no terminal, expr_part;
 
 /*Gramatica*/
 
-S ::= INICIO Expr_list FIN;
-Expr_list ::= Declaracion lis_sent;
-Declaracion ::= Tipo List_var;
-List_var ::= Var | Var List_var;
-Var ::= ID inicial1 | ID List_dim inicial2;
-Inicial1 ::= ASSIGn Num | null;
-List_dim ::= corcheteI Num corcheteD;
-Inicial2 ::= llaveI List_num llaveD | null;
-List_num ::= Num | Num , List_num;
-Tipo ::= entero;
-List_sent ::= Sentencia | Sentencia list_sent;
-Sentencia ::= Sentecia_si | Sentencia_mientras;
-Sentencia_si ::= s Bloque s_end;
-Sentencia_mientras ::= w Bloque w_end;
-Bloque ::= List_sent;
+I ::= Listado Sentencia
+    | Escribe 
+
+Listado ::= Tipo ListaVar
+
+ListaVar ::= var
+	| var coma ListaVar
+
+var ::= ID Inicial1
+	| ID ListaDec Inicial2
+
+Inicial1 ::= ASSIGN Num
+	| vacio
+
+ListaDec ::= corcheteI Num corcheteD
+
+Inicial2 := llaveI ListaNum llaveD
+
+ListaNum ::= Num
+	| Num coma ListaNum
+
+Sentencia ::= Bloque
+	| Bloque Salto Sentencia
+
+Bloque ::= Lee
+	| Escribe
+	| BloqueEstructura
+
+BloqueEsctructura ::= BloqueSi
+		| BloqueM
+
+BloqueSi ::= Si LPARENT Cond RPARENT I Fsi
+
+Bloque ::= Mientras LPARENT Cond RPARENT I FMientras
+
+Cond ::= factor Sym factor
+
+Sym ::= MENOR | MAYOR | EQUALS | DIF | MENOR_IGUAL | MAYOR_IGUAL
+
+Lee ::= LEER Lista_Id
+
+Lista_Id ::= ID
+	| ID coma Lista_Id
+
+Escribe ::= write Lista_L
+
+Lista_L ::= factor
+	| factor coma Lista_L 
+
+factor ::= Num
+        | Num op Num
+
+op ::= PLUS | MINUS | TIMES | DIVIDE
 
