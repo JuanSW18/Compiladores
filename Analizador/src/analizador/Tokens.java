@@ -11,7 +11,7 @@ package analizador;
  */
 public enum Tokens {
     ID, LPARENT, DIF, RPARENT, ASSIGN, EQUALS, MAYOR_IGUAL, MENOR_IGUAL, MAYOR, MENOR,
-    PLUS, TIMES, MINUS, DIVIDE, MOD, si, s_end, w, w_end, read, write, llaveI, llaveD,
+    PLUS, TIMES, MINUS, DIVIDE, MOD, SI, s_end, w, w_end, read, write, llaveI, llaveD,
     corcheteI, corcheteD, tipo_dato, coma, salto, cadena, NUM;
     
 }
