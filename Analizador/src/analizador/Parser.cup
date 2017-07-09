@@ -1,22 +1,23 @@
 package Analizador;
-import java.io.*;
-import java_cup.runtime;
+
 
 /*Terminales*/
 Terminal ID, LPARENT, DIF, RPARENT, ASSIGN, EQUALS, MAYOR_IGUAL, MENOR_IGUAL, 
-        MAYOR, MENOR, PLUS, TIMES, MINUS, DIVIDE, MOD, s, s_end, w, w_end, 
+        MAYOR, MENOR, PLUS, TIMES, MINUS, DIVIDE, MOD, SI, s_end, w, w_end, 
         read, write, llaveI, llaveD, corcheteI, corcheteD, tipo_dato, coma, salto, cadena;
 Terminal INICIO, FIN;
 
 /*No terminales*/
-Expr_list no terminal, expr_part;
+non terminal Listado, ListaVar, var, Inicial1, ListaDec, Inicial2, ListaNum, Sentencia;
+non terminal Bloque, BloqueEsctructura, BloqueSi, BloqueM, Cond, Sym, Lee, Lista_Id;
+non terminal Escribe, Lista_L, factor, op;
 
 /*Gramatica*/
 
 I ::= Listado Sentencia
     | Escribe 
 
-Listado ::= Tipo ListaVar
+Listado ::= tipo_dato ListaVar
 
 ListaVar ::= var
 	| var coma ListaVar
@@ -46,7 +47,7 @@ BloqueEsctructura ::= BloqueSi
 
 BloqueSi ::= Si LPARENT Cond RPARENT I Fsi
 
-Bloque ::= Mientras LPARENT Cond RPARENT I FMientras
+BloqueM ::= Mientras LPARENT Cond RPARENT I FMientras
 
 Cond ::= factor Sym factor
 
