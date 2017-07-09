@@ -8,7 +8,9 @@
   </information>
   <resources>
     <j2se version="1.6+" href="http://java.sun.com/products/autodl/j2se"/>
-    <jar href="Analizador.jar" size="22898" download="eager" />
+    <jar href="Analizador.jar" size="18433" download="eager" />
+    <jar href="lib\java-cup-11b-runtime.jar" size="30960" download="eager" />
+    <jar href="lib\java-cup-11b.jar" size="122080" download="eager" />
     <jar href="lib\jflex-1.6.1.jar" size="1050746" download="eager" />
   </resources>
   <applet-desc  width="800" height="600" main-class="com.javafx.main.NoJavaFXFallback"  name="Analizador" >

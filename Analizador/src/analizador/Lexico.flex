@@ -1,6 +1,8 @@
 package analizador;
 
 import static analizador.Tokens.*;
+import java_cup.runtime.*;
+import java.io.FileReader;
 
 %%
 
@@ -8,6 +10,7 @@ import static analizador.Tokens.*;
 
 %line
 %column
+%cup
 %type Tokens
 letra = [a-zA-Z_]
 digito = [0-9]
