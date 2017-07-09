@@ -28,9 +28,9 @@ public String lexeme;
 ("fmientras")  {lexeme=yytext(); return w_end;}
 ("leer") {lexeme=yytext(); return read;}
 ("escribir") {lexeme=yytext(); return write;}
-({letra}({letra}|{digito})*) {return ID;}
-({espacio}) {return salto;}
-({digito}{digito}*) {return NUM;}
+{letra}({letra}|{digito})* {return ID;}
+{espacio} {return salto;}
+{digito}{digito}* {return NUM;}
 ("(") {return LPARENT;}
 (")") {return RPARENT;}
 ("!=") {return DIF;}

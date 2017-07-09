@@ -120,15 +120,15 @@ public class Analizador extends Application {
      */
     public static void main(String[] args) {
         launch(args);
-        String ruta = "C:\\Users\\Seven\\Documents\\GitHub\\Master\\Analizador\\src\\analizador\\Lexico.flex";
+        String ruta = "src\\analizador\\Lexico.flex";
         generarLexer(ruta);
         
         String opciones[] = new String[5];
         opciones[0] = "-destdir";
-        opciones[1] = "C:\\Users\\Seven\\Documents\\GitHub\\Master\\Analizador\\src\\analizador";
+        opciones[1] = "src\\analizador";
         opciones[2] = "-parser";
         opciones[3] = "parser";
-        opciones[4] = "C:\\Users\\Seven\\Documents\\GitHub\\Master\\Analizador\\src\\analizador\\Parser.cup";
+        opciones[4] = "src\\analizador\\Parser.cup";
         try{
             java_cup.Main.main(opciones);
         }catch(Exception e){
