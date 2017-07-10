@@ -1,72 +1,72 @@
-package Analizador;
+package analizador;
 
 import java_cup.runtime.*;
 import java.io.FileReader;
 
 /*Terminales*/
-Terminal ID, LPARENT, DIF, RPARENT, ASSIGN, EQUALS, MAYOR_IGUAL, MENOR_IGUAL, 
-        MAYOR, MENOR, PLUS, TIMES, MINUS, DIVIDE, MOD, SI, s_end, w, w_end, 
-        read, write, llaveI, llaveD, corcheteI, corcheteD, tipo_dato, coma, salto, cadena;
-Terminal INICIO, FIN;
+terminal ID, LPARENT, DIF, RPARENT, ASSIGN, EQUALS, MAYOR_IGUAL, MENOR_IGUAL, 
+        MAYOR, MENOR, PLUS, TIMES, MINUS, DIVIDE, MOD, SI, ENDSI, WHILE, ENDWHILE, 
+        read, write, llaveI, llaveD, corcheteI, corcheteD, tipo_dato, coma, salto, cadena, Num, vacio, Salto;
+
+terminal INICIO, FIN;
 
 /*No terminales*/
-non terminal Listado, ListaVar, var, Inicial1, ListaDec, Inicial2, ListaNum, Sentencia;
-non terminal Bloque, BloqueEsctructura, BloqueSi, BloqueM, Cond, Sym, Lee, Lista_Id;
+non terminal I, Listado, ListaVar, var, Inicial1, ListaDec, Inicial2, ListaNum, Sentencia;
+non terminal Bloque, BloqueEstructura, BloqueSi, BloqueM, Cond, Sym, Lee, Lista_Id;
 non terminal Escribe, Lista_L, factor, op;
 
 /*Gramatica*/
 
 I ::= Listado Sentencia
-    | Escribe 
+    | Escribe; 
 
-Listado ::= tipo_dato ListaVar
+Listado ::= tipo_dato ListaVar;
 
 ListaVar ::= var
-	| var coma ListaVar
+	| var coma ListaVar;
 
 var ::= ID Inicial1
-	| ID ListaDec Inicial2
+	| ID ListaDec Inicial2;
 
 Inicial1 ::= ASSIGN Num
-	| vacio
+	| vacio;
 
-ListaDec ::= corcheteI Num corcheteD
+ListaDec ::= corcheteI Num corcheteD;
 
-Inicial2 := llaveI ListaNum llaveD
+Inicial2 ::= llaveI ListaNum llaveD;
 
 ListaNum ::= Num
-	| Num coma ListaNum
+	| Num coma ListaNum;
 
 Sentencia ::= Bloque
-	| Bloque Salto Sentencia
+	| Bloque Salto Sentencia;
 
 Bloque ::= Lee
 	| Escribe
-	| BloqueEstructura
+	| BloqueEstructura;
 
 BloqueEsctructura ::= BloqueSi
-		| BloqueM
+		| BloqueM;
 
-BloqueSi ::= Si LPARENT Cond RPARENT I Fsi
+BloqueSi ::= SI LPARENT Cond RPARENT I ENDSI;
 
-BloqueM ::= Mientras LPARENT Cond RPARENT I FMientras
+BloqueM ::= WHILE LPARENT Cond RPARENT I ENDWHILE;
 
-Cond ::= factor Sym factor
+Cond ::= factor Sym factor;
 
-Sym ::= MENOR | MAYOR | EQUALS | DIF | MENOR_IGUAL | MAYOR_IGUAL
+Sym ::= MENOR | MAYOR | EQUALS | DIF | MENOR_IGUAL | MAYOR_IGUAL;
 
-Lee ::= LEER Lista_Id
+Lee ::= read Lista_Id;
 
 Lista_Id ::= ID
-	| ID coma Lista_Id
+	| ID coma Lista_Id;
 
-Escribe ::= write Lista_L
+Escribe ::= write Lista_L;
 
 Lista_L ::= factor
-	| factor coma Lista_L 
+	| factor coma Lista_L ;
 
 factor ::= Num
-        | Num op Num
+        | Num op Num;
 
-op ::= PLUS | MINUS | TIMES | DIVIDE
-
+op ::= PLUS | MINUS | TIMES | DIVIDE;
