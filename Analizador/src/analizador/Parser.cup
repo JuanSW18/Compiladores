@@ -17,7 +17,7 @@ non terminal Escribe, Lista_L, factor, op;
 
 /*Gramatica*/
 
-I ::= Listado Sentencia
+I ::= INICIO Listado Sentencia FIN
     | Escribe; 
 
 Listado ::= tipo_dato ListaVar;
@@ -45,7 +45,7 @@ Bloque ::= Lee
 	| Escribe
 	| BloqueEstructura;
 
-BloqueEsctructura ::= BloqueSi
+BloqueEstructura ::= BloqueSi
 		| BloqueM;
 
 BloqueSi ::= SI LPARENT Cond RPARENT I ENDSI;
