@@ -2,71 +2,131 @@ package analizador;
 
 import java_cup.runtime.*;
 import java.io.FileReader;
+import java.io.FileInputStream;
+import javafx.scene.control.TextArea;
+
+parser code
+{:
+    String cad="";
+    public String Imprimir(){
+        return cad;
+    }
+        
+
+:}
 
 /*Terminales*/
 terminal ID, LPARENT, DIF, RPARENT, ASSIGN, EQUALS, MAYOR_IGUAL, MENOR_IGUAL, 
-        MAYOR, MENOR, PLUS, TIMES, MINUS, DIVIDE, MOD, SI, ENDSI, WHILE, ENDWHILE, 
-        read, write, llaveI, llaveD, corcheteI, corcheteD, tipo_dato, coma, salto, cadena, Num, vacio, Salto;
+        MAYOR, MENOR, PLUS, TIMES, MINUS, DIVIDE, MOD, SI, s_end, w, w_end, 
+        read, write, llaveI, llaveD, corcheteI, corcheteD, tipo_dato, coma, Num, cadena;
 
 terminal INICIO, FIN;
 
 /*No terminales*/
-non terminal I, Listado, ListaVar, var, Inicial1, ListaDec, Inicial2, ListaNum, Sentencia;
-non terminal Bloque, BloqueEstructura, BloqueSi, BloqueM, Cond, Sym, Lee, Lista_Id;
-non terminal Escribe, Lista_L, factor, op;
+non terminal Declaracion, list_var, var, inicial1, list_Dim, inicial2, list_Num;
+non terminal MASTER, OPERADOR, SIGNOS, BLOQUECONDICION, PARAMETRO, BLOQUESI;
+non terminal BMIENTRAS, OPERACION, LISTAOPERACION, VALOR, ESCRIBIR, LEER,
+                ENTRADA, GENERAL, LISTAGENERAL, TEXTO;
 
 /*Gramatica*/
 
-I ::= INICIO Listado Sentencia FIN
-    | Escribe; 
+//{: System.out.println("Regla SS coincidente"); :};
 
-Listado ::= tipo_dato ListaVar;
+MASTER ::= INICIO LISTAGENERAL FIN 
+{: cad+="Regla INICIO detectada\n"; 
+    System.out.println("Regla INICIO coincidente"); :};
 
-ListaVar ::= var
-	| var coma ListaVar;
+Declaracion ::= tipo_dato list_var
+{: cad+="Regla Declaracion detectada\n";
+System.out.println("Regla Declaracion coincidente"); :};
 
-var ::= ID Inicial1
-	| ID ListaDec Inicial2;
+list_var ::= var 
+            | var coma list_var
+{: cad+="Regla list_var detectada\n";
+System.out.println("Regla list_var coincidente"); :};
 
-Inicial1 ::= ASSIGN Num
-	| vacio;
+var ::= ID inicial1 
+        | ID 
+        | ID list_Dim inicial2 
+        | ID list_Dim 
+{: cad+="Regla var detectada\n";
+System.out.println("Regla var coincidente"); :};
 
-ListaDec ::= corcheteI Num corcheteD;
+inicial1 ::= ASSIGN Num
+{: cad+="Regla inicial1 detectada\n";
+System.out.println("Regla inicial1 coincidente"); :};
 
-Inicial2 ::= llaveI ListaNum llaveD;
+list_Dim ::= corcheteI Num corcheteD
+{: cad+="Regla list_Dim detectada\n";
+System.out.println("Regla list_Dim coincidente"); :};
 
-ListaNum ::= Num
-	| Num coma ListaNum;
+inicial2 ::= ASSIGN llaveI list_Num llaveD
+{: cad+="Regla inicial2 detectada\n";
+System.out.println("Regla inicial2 coincidente"); :};
 
-Sentencia ::= Bloque
-	| Bloque Salto Sentencia;
+list_Num ::= Num 
+        | Num coma list_Num
+{: cad+="Regla list_Num detectada\n";
+System.out.println("Regla list_Num coincidente"); :};
 
-Bloque ::= Lee
-	| Escribe
-	| BloqueEstructura;
+OPERADOR ::= EQUALS | MAYOR_IGUAL | MENOR_IGUAL | MAYOR | MENOR | DIF
+{: cad+="Regla OPERADOR detectada\n";
+System.out.println("Regla OPERADOR coincidente"); :};
 
-BloqueEstructura ::= BloqueSi
-		| BloqueM;
+SIGNOS ::=  PLUS | TIMES | MINUS | DIVIDE | MOD
+{: cad+="Regla SIGNOS detectada\n";
+System.out.println("Regla SIGNOS coincidente"); :};
 
-BloqueSi ::= SI LPARENT Cond RPARENT I ENDSI;
+BLOQUECONDICION ::= LPARENT PARAMETRO RPARENT
+{: cad+="Regla BLOQUECONDICION detectada\n";
+System.out.println("Regla BLOQUECONDICION coincidente"); :};
 
-BloqueM ::= WHILE LPARENT Cond RPARENT I ENDWHILE;
+PARAMETRO ::= ID OPERADOR Num
+            | Num OPERADOR ID
+            | ID OPERADOR ID
+{: cad+="Regla PARAMETRO detectada\n";
+System.out.println("Regla PARAMETRO coincidente"); :}; //FALTAN COMPARACIONES COMPLEJAS
 
-Cond ::= factor Sym factor;
+BLOQUESI ::= SI BLOQUECONDICION LISTAGENERAL s_end
+{: cad+="Regla BLOQUESI detectada\n";
+System.out.println("Regla BLOQUESI coincidente"); :};
 
-Sym ::= MENOR | MAYOR | EQUALS | DIF | MENOR_IGUAL | MAYOR_IGUAL;
+BMIENTRAS ::= w BLOQUECONDICION LISTAGENERAL w_end
+{: cad+="Regla BMIENTRAS detectada\n";
+System.out.println("Regla BMIENTRAS coincidente"); :};
 
-Lee ::= read Lista_Id;
+OPERACION ::= ID ASSIGN LISTAOPERACION
+{: cad+="Regla OPERACION detectada\n";
+System.out.println("Regla OPERACION coincidente"); :};
 
-Lista_Id ::= ID
-	| ID coma Lista_Id;
+LISTAOPERACION ::= VALOR | VALOR SIGNOS LISTAOPERACION
+{: cad+="Regla LISTAOPERACION detectada\n";
+System.out.println("Regla LISTAOPERACION coincidente"); :};
 
-Escribe ::= write Lista_L;
+VALOR ::= Num | ID
+{: cad+="Regla VALOR detectada\n";
+System.out.println("Regla VALOR coincidente"); :};
 
-Lista_L ::= factor
-	| factor coma Lista_L ;
+ESCRIBIR ::= write TEXTO
+{: cad+="Regla ESCRIBIR detectada\n";
+System.out.println("Regla ESCRIBIR coincidente"); :};
 
-factor ::= Num
-        | Num op Num;
+TEXTO ::= ID | cadena | ID coma TEXTO | cadena coma TEXTO
+{: cad+="Regla TEXTO detectada\n";
+System.out.println("Regla TEXTO coincidente"); :};
 
-op ::= PLUS | MINUS | TIMES | DIVIDE;
+LEER ::= read ENTRADA
+{: cad+="Regla LEER detectada\n";
+System.out.println("Regla LEER coincidente"); :};
+
+ENTRADA ::= ID | ID coma ENTRADA
+{: cad+="Regla ENTRADA detectada\n";
+System.out.println("Regla ENTRADA coincidente"); :};
+
+GENERAL ::= Declaracion | OPERACION | LEER | ESCRIBIR | BLOQUESI | BMIENTRAS
+{: cad+="Regla GENERAL detectada\n";
+System.out.println("Regla GENERAL coincidente"); :};
+
+LISTAGENERAL ::= GENERAL | GENERAL LISTAGENERAL
+{: cad+="Regla LISTAGENERAL detectada\n";
+System.out.println("Regla LISTAGENERAL coincidente"); :};

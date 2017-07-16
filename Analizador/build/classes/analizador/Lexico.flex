@@ -26,20 +26,25 @@ StringBuffer string = new StringBuffer();
 
 letra = [a-zA-Z_]
 digito = [0-9]
-espacio = [\n]
-
+WHITE = [ \t|\r|\n]
+cadena = \"[^\"]*\"
 %%
 
+{WHITE}  {}
+
+"INICIO" {return symbol(sym.INICIO);}
+"FIN" {return symbol(sym.FIN);}
 "entero" {return symbol(sym.tipo_dato);}
 "si" {return symbol(sym.SI);}
-"fsi" {return symbol(sym.ENDSI);}
-"mientras"  {return symbol(sym.WHILE);}
-"fmientras"  {return symbol(sym.ENDWHILE);}
+"fsi" {return symbol(sym.s_end);}
+"mientras"  {return symbol(sym.w);}
+"fmientras"  {return symbol(sym.w_end);}
 "leer" {return symbol(sym.read);}
 "escribir" {return symbol(sym.write);}
+//{cadena} {return symbol(sym.CADENA);}
 {letra}({letra}|{digito})* {return symbol(sym.ID);}
-{espacio} {return symbol(sym.salto);}
 {digito}{digito}* {return symbol(sym.Num);}
+{cadena} {return symbol(sym.cadena);}
 "(" {return symbol(sym.LPARENT);}
 ")" {return symbol(sym.RPARENT);}
 "!=" {return symbol(sym.DIF);}

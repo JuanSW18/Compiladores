@@ -8,42 +8,39 @@ package analizador;
 /** CUP generated class containing symbol constants. */
 public class sym {
   /* terminals */
-  public static final int tipo_dato = 27;
-  public static final int LPARENT = 3;
-  public static final int RPARENT = 5;
-  public static final int DIVIDE = 15;
-  public static final int corcheteI = 25;
-  public static final int EQUALS = 7;
-  public static final int SI = 17;
-  public static final int corcheteD = 26;
-  public static final int write = 22;
-  public static final int coma = 28;
-  public static final int FIN = 35;
-  public static final int MINUS = 14;
-  public static final int read = 21;
-  public static final int ENDSI = 18;
-  public static final int PLUS = 12;
-  public static final int ASSIGN = 6;
-  public static final int ID = 2;
-  public static final int ENDWHILE = 20;
-  public static final int EOF = 0;
-  public static final int error = 1;
-  public static final int DIF = 4;
-  public static final int Salto = 33;
-  public static final int MENOR = 11;
-  public static final int MOD = 16;
-  public static final int llaveI = 23;
-  public static final int vacio = 32;
-  public static final int Num = 31;
-  public static final int MAYOR = 10;
-  public static final int llaveD = 24;
   public static final int TIMES = 13;
-  public static final int WHILE = 19;
-  public static final int MAYOR_IGUAL = 8;
-  public static final int salto = 29;
-  public static final int INICIO = 34;
-  public static final int MENOR_IGUAL = 9;
+  public static final int MOD = 16;
   public static final int cadena = 30;
+  public static final int corcheteD = 26;
+  public static final int MENOR = 11;
+  public static final int PLUS = 12;
+  public static final int RPARENT = 5;
+  public static final int coma = 28;
+  public static final int MENOR_IGUAL = 9;
+  public static final int s_end = 18;
+  public static final int MAYOR_IGUAL = 8;
+  public static final int tipo_dato = 27;
+  public static final int ID = 2;
+  public static final int llaveI = 23;
+  public static final int w = 19;
+  public static final int EQUALS = 7;
+  public static final int llaveD = 24;
+  public static final int LPARENT = 3;
+  public static final int MAYOR = 10;
+  public static final int EOF = 0;
+  public static final int DIVIDE = 15;
+  public static final int Num = 29;
+  public static final int SI = 17;
+  public static final int MINUS = 14;
+  public static final int error = 1;
+  public static final int read = 21;
+  public static final int w_end = 20;
+  public static final int ASSIGN = 6;
+  public static final int write = 22;
+  public static final int FIN = 32;
+  public static final int corcheteI = 25;
+  public static final int DIF = 4;
+  public static final int INICIO = 31;
   public static final String[] terminalNames = new String[] {
   "EOF",
   "error",
@@ -63,9 +60,9 @@ public class sym {
   "DIVIDE",
   "MOD",
   "SI",
-  "ENDSI",
-  "WHILE",
-  "ENDWHILE",
+  "s_end",
+  "w",
+  "w_end",
   "read",
   "write",
   "llaveI",
@@ -74,11 +71,8 @@ public class sym {
   "corcheteD",
   "tipo_dato",
   "coma",
-  "salto",
-  "cadena",
   "Num",
-  "vacio",
-  "Salto",
+  "cadena",
   "INICIO",
   "FIN"
   };

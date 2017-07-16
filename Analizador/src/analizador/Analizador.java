@@ -8,7 +8,11 @@ package analizador;
 import Eventos.EventLineNumber;
 import Eventos.EventOpen;
 import Eventos.EventSave;
+import java.io.BufferedReader;
 import java.io.File;
+import java.io.FileReader;
+import java.io.Reader;
+import java.io.StringReader;
 import javafx.application.Application;
 import javafx.geometry.Orientation;
 import javafx.geometry.Pos;
@@ -19,6 +23,7 @@ import javafx.scene.control.TextArea;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.GridPane;
+import javafx.scene.text.Text;
 import javafx.stage.Stage;
 
 /**
@@ -26,6 +31,8 @@ import javafx.stage.Stage;
  * @author Seven
  */
 public class Analizador extends Application {
+    
+    
     
     @Override
     public void start(Stage primaryStage) {
@@ -47,10 +54,8 @@ public class Analizador extends Application {
         ImageView iv = new ImageView();
         iv.setImage(icon_play);*/
         Button btn_open = new Button("", new ImageView("recursos/open_24.png"));
-        btn_open.setOnMouseClicked(new EventOpen(primaryStage));
         
         Button btn_save = new Button("", new ImageView("recursos/save_24.png"));
-        btn_save.setOnMouseClicked(new EventSave(primaryStage));
         
         Button btn_play = new Button("", new ImageView("recursos/play_24.png"));
         
@@ -69,23 +74,37 @@ public class Analizador extends Application {
         /*----------------------------------------------------*/
         /*--------------------Contendor 2--------------------*/
         GridPane pane_code = new GridPane();
-        
+        pane_code.setVgap(5);
         //Area que contiene el codigo a leer
         TextArea area_codigo = new TextArea();
-        area_codigo.setPrefSize(600, 638);
+        //area_codigo.setPrefSize(600, 638);
+        area_codigo.setPrefSize(600, 400);
         
+        //Texto
+        Text txt_out = new Text("Output: ");
+        
+        //Area de output
+        TextArea area_out = new TextArea();
+        area_out.setPrefSize(600, 200);
+        
+        //EVENTOS
+        btn_open.setOnMouseClicked(new EventOpen(primaryStage, area_codigo));
+        btn_save.setOnMouseClicked(new EventSave(primaryStage, area_codigo));
+        btn_play.setOnMousePressed(new EventRun(area_codigo, area_out));
         //Linea de numeros
-        TextArea line_numbers = new TextArea("1");
-        line_numbers.setEditable(false);
-        line_numbers.setPrefColumnCount(1);
-        line_numbers.setPrefSize(0.5, area_codigo.getHeight());
+        //TextArea line_numbers = new TextArea("1");
+        //line_numbers.setEditable(false);
+        //line_numbers.setPrefColumnCount(1);
+        //line_numbers.setPrefSize(0.5, area_codigo.getHeight());
         
         //Evento de area codigo para line_numbers
-        area_codigo.setOnKeyPressed(new EventLineNumber(line_numbers));
+        //area_codigo.setOnKeyPressed(new EventLineNumber(line_numbers));
         
-        pane_code.add(line_numbers, 0, 0);
-        pane_code.add(area_codigo, 1, 0);
-        
+        //pane_code.add(line_numbers, 0, 0);
+        //pane_code.add(area_codigo, 1, 0);
+        pane_code.add(area_codigo, 0, 0);
+        pane_code.add(txt_out, 0, 1);
+        pane_code.add(area_out, 0, 2);
         
         /*---------------------------------------------------------------*/
         /*----------Añadir componentes al contenedor principal----------*/
@@ -107,7 +126,7 @@ public class Analizador extends Application {
         
         /*--------------------------------------------------------------------*/
         /*-----------------------Declaraciones con CSS-----------------------*/
-        line_numbers.lookup(".content").setStyle("-fx-background-color: whitesmoke");
+        //line_numbers.lookup(".content").setStyle("-fx-background-color: whitesmoke");
         /*Region region = ( Region ) line_numbers.lookup( ".content");
         region.setBackground( new Background( new BackgroundFill( Color.WHITESMOKE, CornerRadii.EMPTY, Insets.EMPTY ) ) );
         //Or you can set it by setStyle()
