@@ -36,19 +36,22 @@ public class EventSave implements EventHandler<MouseEvent>{
         //ventana_save.getExtensionFilters().add(extFilter);
         
         //ventana_save.showSaveDialog(aux);
-        File ruta_guardar = ventana_save.showSaveDialog(aux);
-        if (ruta_guardar != null) {
-            FileWriter fw = null;
-            try {
-                //String ruta = ruta_guardar.getAbsolutePath();
-                fw = new FileWriter(ruta_guardar);
-                fw.write(code_s.getText());
-                fw.close();
-                System.out.println("se guardo archivo " + ruta_guardar.getAbsolutePath());
-            } catch (IOException e) {
-                System.out.println("Error al guardar");
+        try{
+            File ruta_guardar = ventana_save.showSaveDialog(aux);
+            if (ruta_guardar != null) {
+                FileWriter fw = null;
+                try {
+                    //String ruta = ruta_guardar.getAbsolutePath();
+                    fw = new FileWriter(ruta_guardar);
+                    fw.write(code_s.getText());
+                    fw.close();
+                    System.out.println("se guardo archivo " + ruta_guardar.getAbsolutePath());
+                } catch (IOException e) {
+                    System.out.println("Error al guardar");
+                }
             }
-        } else {
+        }catch(Exception e){
+            System.out.println("Ventana Guardar cerrada");
         }
         
     }

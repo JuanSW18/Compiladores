@@ -33,7 +33,7 @@ public class EventRun implements EventHandler<MouseEvent>{
         try {
             prueba(aux);
         } catch (Exception ex) {
-            System.out.println("ERROR DE EVENTRUN");
+            System.out.println("Error fr EventRun");
         }
     }
     
