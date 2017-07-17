@@ -11,8 +11,8 @@ parser code
     public String Imprimir(){
         return cad;
     }
-        
-
+    
+    
 :}
 
 /*Terminales*/
@@ -33,8 +33,8 @@ non terminal BMIENTRAS, OPERACION, LISTAOPERACION, VALOR, ESCRIBIR, LEER,
 //{: System.out.println("Regla SS coincidente"); :};
 
 MASTER ::= INICIO LISTAGENERAL FIN 
-{: cad+="Regla INICIO detectada\n"; 
-    System.out.println("Regla INICIO coincidente"); :};
+{: cad+="Regla INICIO ---- FIN detectada\n"; 
+    System.out.println("Regla INICIO ---- FIN coincidente"); :};
 
 Declaracion ::= tipo_dato list_var
 {: cad+="Regla Declaracion detectada\n";

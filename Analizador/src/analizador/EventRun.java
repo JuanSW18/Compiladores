@@ -9,6 +9,7 @@ package analizador;
 import java.io.BufferedReader;
 import java.io.StringReader;
 import javafx.event.EventHandler;
+import javafx.scene.control.Alert;
 import javafx.scene.control.TextArea;
 import javafx.scene.input.MouseEvent;
 
@@ -33,7 +34,15 @@ public class EventRun implements EventHandler<MouseEvent>{
         try {
             prueba(aux);
         } catch (Exception ex) {
-            System.out.println("Error fr EventRun");
+            if(aux.getText().equals(null) || aux.getText().equals("")){
+                Alert alert = new Alert(Alert.AlertType.INFORMATION);
+                alert.setTitle("Error");
+                alert.setHeaderText("Area de codigo vacia");
+                alert.setContentText(null);
+                alert.setResizable(false);
+                alert.showAndWait();
+            }else
+                aux_out.setText("Error de codigo");
         }
     }
     

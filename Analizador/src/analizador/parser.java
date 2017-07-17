@@ -267,8 +267,8 @@ class CUP$parser$actions {
           case 0: // MASTER ::= INICIO LISTAGENERAL FIN 
             {
               Object RESULT =null;
-		 cad+="Regla INICIO detectada\n"; 
-    System.out.println("Regla INICIO coincidente"); 
+		 cad+="Regla INICIO ---- FIN detectada\n"; 
+    System.out.println("Regla INICIO ---- FIN coincidente"); 
               CUP$parser$result = parser.getSymbolFactory().newSymbol("MASTER",7, ((java_cup.runtime.Symbol)CUP$parser$stack.elementAt(CUP$parser$top-2)), ((java_cup.runtime.Symbol)CUP$parser$stack.peek()), RESULT);
             }
           return CUP$parser$result;

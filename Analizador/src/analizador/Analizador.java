@@ -86,6 +86,7 @@ public class Analizador extends Application {
         //Area de output
         TextArea area_out = new TextArea();
         area_out.setPrefSize(600, 200);
+        area_out.setEditable(false);
         
         //EVENTOS
         btn_open.setOnMouseClicked(new EventOpen(primaryStage, area_codigo));

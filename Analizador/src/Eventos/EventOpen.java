@@ -36,6 +36,7 @@ public class EventOpen implements EventHandler<MouseEvent>{
         try{
             File archivoSelec = ventana_abrir.showOpenDialog(aux);
             //System.out.println(archivoSelec.getAbsolutePath());
+            code.setText(null);
             if (archivoSelec.exists()) {
                 String ruta = archivoSelec.getAbsolutePath();
                 FileReader fr = null;
