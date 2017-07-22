@@ -11,7 +11,7 @@ import java.io.FileReader;
  * <a href="http://www.jflex.de/">JFlex</a> 1.6.1
  * from the specification file <tt>src/analizador/Lexico.flex</tt>
  */
-class Lexico implements java_cup.runtime.Scanner {
+public class Lexico implements java_cup.runtime.Scanner {
 
   /** This character denotes the end of file */
   public static final int YYEOF = -1;
@@ -278,7 +278,7 @@ class Lexico implements java_cup.runtime.Scanner {
   private int zzFinalHighSurrogate = 0;
 
   /* user code: */
-StringBuffer string = new StringBuffer();
+    StringBuffer string = new StringBuffer();
 
     private Symbol symbol(int type) {
         return new Symbol(type, yyline, yycolumn);
@@ -287,6 +287,10 @@ StringBuffer string = new StringBuffer();
     private Symbol symbol(int type, Object value) {
         return new Symbol(type, yyline, yycolumn, value);
     }
+    
+    private Symbol symbol(int type, int yyline, int yycolumn, String valor) {
+        return new Symbol(type, yyline, yycolumn, valor);
+    }
 
 
   /**
@@ -294,7 +298,7 @@ StringBuffer string = new StringBuffer();
    *
    * @param   in  the java.io.Reader to read input from.
    */
-  Lexico(java.io.Reader in) {
+  public Lexico(java.io.Reader in) {
     this.zzReader = in;
   }
 
@@ -549,6 +553,8 @@ StringBuffer string = new StringBuffer();
     while (true) {
       zzMarkedPosL = zzMarkedPos;
 
+      yychar+= zzMarkedPosL-zzStartRead;
+
       boolean zzR = false;
       int zzCh;
       int zzCharCount;
@@ -673,11 +679,11 @@ StringBuffer string = new StringBuffer();
       else {
         switch (zzAction < 0 ? zzAction : ZZ_ACTION[zzAction]) {
           case 1: 
-            { return symbol(sym.ID);
+            { return symbol(sym.ID, yyline, yycolumn, yytext());
             }
           case 33: break;
           case 2: 
-            { return symbol(sym.Num);
+            { return symbol(sym.Num, yyline, yycolumn, yytext());
             }
           case 34: break;
           case 3: 

@@ -5,14 +5,10 @@
  */
 package analizador;
 
-import Eventos.EventLineNumber;
+import Eventos.EventRun;
 import Eventos.EventOpen;
 import Eventos.EventSave;
-import java.io.BufferedReader;
 import java.io.File;
-import java.io.FileReader;
-import java.io.Reader;
-import java.io.StringReader;
 import javafx.application.Application;
 import javafx.geometry.Orientation;
 import javafx.geometry.Pos;

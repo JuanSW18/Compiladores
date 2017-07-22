@@ -231,12 +231,13 @@ public class parser extends java_cup.runtime.lr_parser {
 
 
 
+    String cabezera = "#include<iostream>\nusing namespace std;\n";
     String cad="";
     public String Imprimir(){
-        return cad;
+        return cabezera + "int main()\n{\n" + cad + "\n}";
     }
-        
-
+    
+    
 
 
 /** Cup generated class to encapsulate user supplied action code.*/
@@ -267,7 +268,7 @@ class CUP$parser$actions {
           case 0: // MASTER ::= INICIO LISTAGENERAL FIN 
             {
               Object RESULT =null;
-		 cad+="Regla INICIO ---- FIN detectada\n"; 
+		cad+="Regla INICIO ---- FIN detectada\n"; 
     System.out.println("Regla INICIO ---- FIN coincidente"); 
               CUP$parser$result = parser.getSymbolFactory().newSymbol("MASTER",7, ((java_cup.runtime.Symbol)CUP$parser$stack.elementAt(CUP$parser$top-2)), ((java_cup.runtime.Symbol)CUP$parser$stack.peek()), RESULT);
             }
@@ -291,7 +292,7 @@ class CUP$parser$actions {
           case 2: // Declaracion ::= tipo_dato list_var 
             {
               Object RESULT =null;
-		 cad+="Regla Declaracion detectada\n";
+		cad+="Regla Declaracion detectada\n";
 System.out.println("Regla Declaracion coincidente"); 
               CUP$parser$result = parser.getSymbolFactory().newSymbol("Declaracion",0, ((java_cup.runtime.Symbol)CUP$parser$stack.elementAt(CUP$parser$top-1)), ((java_cup.runtime.Symbol)CUP$parser$stack.peek()), RESULT);
             }
@@ -310,7 +311,7 @@ System.out.println("Regla Declaracion coincidente");
           case 4: // list_var ::= var coma list_var 
             {
               Object RESULT =null;
-		 cad+="Regla list_var detectada\n";
+		cad+="Regla list_var detectada\n";
 System.out.println("Regla list_var coincidente"); 
               CUP$parser$result = parser.getSymbolFactory().newSymbol("list_var",1, ((java_cup.runtime.Symbol)CUP$parser$stack.elementAt(CUP$parser$top-2)), ((java_cup.runtime.Symbol)CUP$parser$stack.peek()), RESULT);
             }
@@ -357,7 +358,7 @@ System.out.println("Regla var coincidente");
           case 9: // inicial1 ::= ASSIGN Num 
             {
               Object RESULT =null;
-		 cad+="Regla inicial1 detectada\n";
+		cad+="Regla inicial1 detectada\n";
 System.out.println("Regla inicial1 coincidente"); 
               CUP$parser$result = parser.getSymbolFactory().newSymbol("inicial1",3, ((java_cup.runtime.Symbol)CUP$parser$stack.elementAt(CUP$parser$top-1)), ((java_cup.runtime.Symbol)CUP$parser$stack.peek()), RESULT);
             }
@@ -367,7 +368,7 @@ System.out.println("Regla inicial1 coincidente");
           case 10: // list_Dim ::= corcheteI Num corcheteD 
             {
               Object RESULT =null;
-		 cad+="Regla list_Dim detectada\n";
+		cad+="Regla list_Dim detectada\n";
 System.out.println("Regla list_Dim coincidente"); 
               CUP$parser$result = parser.getSymbolFactory().newSymbol("list_Dim",4, ((java_cup.runtime.Symbol)CUP$parser$stack.elementAt(CUP$parser$top-2)), ((java_cup.runtime.Symbol)CUP$parser$stack.peek()), RESULT);
             }

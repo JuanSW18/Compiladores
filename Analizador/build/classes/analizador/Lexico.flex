@@ -6,13 +6,14 @@ import java.io.FileReader;
 %%
 
 %class Lexico
-%cup
+%public
 %line
+%char
+%cup
 %column
 
-
 %{
-StringBuffer string = new StringBuffer();
+    StringBuffer string = new StringBuffer();
 
     private Symbol symbol(int type) {
         return new Symbol(type, yyline, yycolumn);
@@ -20,6 +21,10 @@ StringBuffer string = new StringBuffer();
     
     private Symbol symbol(int type, Object value) {
         return new Symbol(type, yyline, yycolumn, value);
+    }
+    
+    private Symbol symbol(int type, int yyline, int yycolumn, String valor) {
+        return new Symbol(type, yyline, yycolumn, valor);
     }
 %}
 
@@ -42,8 +47,9 @@ cadena = \"[^\"]*\"
 "leer" {return symbol(sym.read);}
 "escribir" {return symbol(sym.write);}
 //{cadena} {return symbol(sym.CADENA);}
-{letra}({letra}|{digito})* {return symbol(sym.ID);}
-{digito}{digito}* {return symbol(sym.Num);}
+{letra}({letra}|{digito})* {return symbol(sym.ID, yyline, yycolumn, yytext());}
+{digito}{digito}* {return symbol(sym.Num, yyline, yycolumn, yytext());}
+//[:digit:] {return symbol(sym.Num);}
 {cadena} {return symbol(sym.cadena);}
 "(" {return symbol(sym.LPARENT);}
 ")" {return symbol(sym.RPARENT);}

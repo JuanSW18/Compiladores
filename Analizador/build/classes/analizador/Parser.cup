@@ -7,9 +7,10 @@ import javafx.scene.control.TextArea;
 
 parser code
 {:
+    String cabezera = "#include<iostream>\nusing namespace std;\n";
     String cad="";
     public String Imprimir(){
-        return cad;
+        return cabezera + "int main()\n{\n" + cad + "\n}";
     }
     
     
@@ -33,32 +34,38 @@ non terminal BMIENTRAS, OPERACION, LISTAOPERACION, VALOR, ESCRIBIR, LEER,
 //{: System.out.println("Regla SS coincidente"); :};
 
 MASTER ::= INICIO LISTAGENERAL FIN 
-{: cad+="Regla INICIO ---- FIN detectada\n"; 
+{:cad+="Regla INICIO ---- FIN detectada\n"; 
     System.out.println("Regla INICIO ---- FIN coincidente"); :};
 
+
 Declaracion ::= tipo_dato list_var
-{: cad+="Regla Declaracion detectada\n";
+{:cad+="Regla Declaracion detectada\n";
 System.out.println("Regla Declaracion coincidente"); :};
+
 
 list_var ::= var 
             | var coma list_var
-{: cad+="Regla list_var detectada\n";
+{:cad+="Regla list_var detectada\n";
 System.out.println("Regla list_var coincidente"); :};
 
+
 var ::= ID inicial1 
-        | ID 
+        | ID
         | ID list_Dim inicial2 
         | ID list_Dim 
 {: cad+="Regla var detectada\n";
 System.out.println("Regla var coincidente"); :};
 
+
 inicial1 ::= ASSIGN Num
-{: cad+="Regla inicial1 detectada\n";
+{:cad+="Regla inicial1 detectada\n";
 System.out.println("Regla inicial1 coincidente"); :};
 
+
 list_Dim ::= corcheteI Num corcheteD
-{: cad+="Regla list_Dim detectada\n";
+{:cad+="Regla list_Dim detectada\n";
 System.out.println("Regla list_Dim coincidente"); :};
+
 
 inicial2 ::= ASSIGN llaveI list_Num llaveD
 {: cad+="Regla inicial2 detectada\n";
